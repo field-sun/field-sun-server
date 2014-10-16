@@ -14,14 +14,16 @@ module.exports = function(app) {
 		res.send({
 			fName: 'Josh',
 			lName: 'Lankford',
-			language: 'JavaScript'
+			language: 'JavaScript',
+			location: 'San Francisco'
 		})
 	})
 
 	app.get('/company/1', function(req, res){
 		res.send({
 			cName: 'Example',
-			language: 'JavaScript'
+			language: 'JavaScript',
+			location: 'San Francisco'
 		})
 	})
 
