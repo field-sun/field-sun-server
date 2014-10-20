@@ -9,7 +9,7 @@ var Sequelize = require('sequelize')
   , sequelize = new Sequelize('engnr', null, null, {
       dialect: 'postgres',
       host: 'localhost',
-      port: process.env.PORT || 5432,
+      port: process.env.DBPORT || 5432,
     });
 
 app.use(bodyParser.json());
