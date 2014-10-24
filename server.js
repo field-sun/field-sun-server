@@ -13,6 +13,8 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(__dirname + '/public'));
 require('./routes/routes')(app);
 
+var bookshelf = require('./config/db');
+
 app.listen(port);	
 console.log('ENGNR API running on: ' + port);
 exports = module.exports = app;
