@@ -5,10 +5,11 @@ var Cards = require('../api/cards/cards.model');
 var knex = require('knex')({
   client: 'pg',
   connection: {
-    host: '127.0.0.1',
-    user: null,
-    password: null,
-    database: 'engnr'
+    host: 'ec2-54-204-32-91.compute-1.amazonaws.com',
+    port: 5432
+    user: 'db2g834vbjmt9f',
+    password: '9V7afezRJKRUoIvS38NMsPPATk',
+    database: 'db2g834vbjmt9f'
   }
 });
 
