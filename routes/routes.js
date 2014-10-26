@@ -59,17 +59,17 @@ module.exports = function(app) {
 // POST Request to api/company
 // Expects urlenconded keys/values
 // Expects name & location
-// On success returns a JSON object with the comopany id
+// On success returns a JSON object with the company id
   app.post('/api/company', function(req, res) {
   	new Companies().where({
   		name: req.body.name,
   		location: req.body.location
   	})
-  	.fetchAll().then(function(company){
+  	.save().then(function(company){
   		res.send({id: company.id});
   	}).catch(function(error) {
       console.log(error);
-      res.send('An error occured');
+      res.send('An error occured', error);
     });
   });
 
