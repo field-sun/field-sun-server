@@ -38,11 +38,11 @@ module.exports = function(app) {
 // On success returns a JSON object with the user id
   app.post('/api/user', function(req, res) {
   	new User({
-  		name: req.body.name,
-  		location: req.body.location,
-  		linkedin_token: req.body.linkedin,
-  		github_token: req.body.github,
-  		auth_token: req.body.auth
+  		name: req.query.name,
+  		location: req.query.location,
+  		linkedin_token: req.query.linkedin,
+  		github_token: req.query.github,
+  		auth_token: req.query.auth
   	})
   	.save().then(function(user){
   		res.send({id: user.id});
@@ -69,11 +69,11 @@ module.exports = function(app) {
 // POST Request to api/company
 // Expects urlenconded keys/values
 // Expects name & location
-// On success returns a JSON object with the comopany id
+// On success returns a JSON object with the company id
   app.post('/api/company', function(req, res) {
-  	new Companies().where({
-  		name: req.body.name,
-  		location: req.body.location
+  	new Companies({
+  		name: req.query.name,
+  		location: req.query.location
   	})
   	.save().then(function(company){
   		res.send({id: company.id});
@@ -105,7 +105,7 @@ module.exports = function(app) {
     });
   });
 
-// GET Request to api/cards/new?id='id'
+// GET Request to api/comapny/cards/new?id='id'
 // Expects id
 // On success returns a JSON object with potential mathces
   app.get('/api/company/cards/new', function(req, res) {
@@ -120,6 +120,22 @@ module.exports = function(app) {
       res.send('An error occured', error);
     });
   });
+
+// GET Request to api/users/cards/new?id='id'
+// Expects id
+// On success returns a JSON object with potential mathces
+  app.get('/api/users/cards/new', function(req, res) {
+    knex.select('name', 'company_id','users_id', 'interest')
+    .from('users')
+      .leftOuterJoin('matches', 'users.id', 'users_id')
+      .where({users_id: req.query.id, interest: null})
+    .then(function(cards) {
+      res.send(cards);
+    }).catch(function(error) {
+      console.log(error);
+      res.send('An error occured', error);
+    });
+  });  
 
 // GET Request to api/cards/matched?id='id'
 // Expects id
