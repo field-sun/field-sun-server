@@ -7,9 +7,10 @@ var knex = require('knex')({
   connection: {
     host: 'ec2-54-204-32-91.compute-1.amazonaws.com',
     port: 5432,
-    user: 'db2g834vbjmt9f',
+    user: 'bnyvbckwckmzve',
     password: '9V7afezRJKRUoIvS38NMsPPATk',
-    database: 'db2g834vbjmt9f'
+    database: 'db2g834vbjmt9f',
+    ssl: true
   }
 });
 
