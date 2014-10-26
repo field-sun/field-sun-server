@@ -80,7 +80,7 @@ module.exports = function(app) {
   		res.send({id: company.id});
   	}).catch(function(error) {
       console.log(error);
-      res.send('An error occured');
+      res.send('An error occured', error);
     });
   });
 
