@@ -29,13 +29,13 @@ module.exports = function(app) {
 // On success returns a JSON object with the user id
   app.post('/api/user', function(req, res) {
   	new User({
-  		name: req.query.name,
-  		location: req.query.location,
-      languages: req.query.languages,
-      education: req.query.education,
-  		linkedin_token: req.query.linkedin,
-  		github_token: req.query.github,
-  		auth_token: req.query.auth
+  		name: req.body.name,
+  		location: req.body.location,
+      languages: req.body.languages,
+      education: req.body.education,
+  		linkedin_token: req.body.linkedin,
+  		github_token: req.body.github,
+  		auth_token: req.body.auth
   	})
   	.save().then(function(user){
   		res.send({id: user.id});
@@ -65,9 +65,9 @@ module.exports = function(app) {
 // On success returns a JSON object with the company id
   app.post('/api/company', function(req, res) {
   	new Companies({
-  		name: req.query.name,
-  		location: req.query.location,
-      imageURL: req.query.image
+  		name: req.body.name,
+  		location: req.body.location,
+      imageURL: req.body.image
   	})
   	.save().then(function(company){
   		res.send({id: company.id});
@@ -152,9 +152,9 @@ module.exports = function(app) {
 
   app.post('/api/cards/matched', function(req, res) {
     new Cards({
-      company_id: req.query.compID,
-      users_id: req.query.userID,
-      interest: req.query.interest
+      company_id: req.body.compID,
+      users_id: req.body.userID,
+      interest: req.body.interest
     })
     .save().then(function(match){
       res.send({id: matched.id});
