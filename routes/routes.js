@@ -2,7 +2,6 @@ var User = require('../api/user/user.model');
 var Companies = require('../api/company/company.model');
 var Cards = require('../api/cards/cards.model');
 var knex = require('../config/knex');
-app.use(bodyParser.json());
 
 module.exports = function(app) {
 
@@ -37,9 +36,9 @@ app.all('*', function(req, res, next) {
 // Expects name/location/languages/education/linkedin/github/auth
 // On success returns a JSON object with the user id
   app.post('/api/user', function(req, res, next) {
-    console.log(req);
-    console.log(req.body);
-    console.log(res);
+    console.log('Request: ', req);
+    console.log('Body: ', req.body);
+    console.log('Response: ', res);
   	new User({
   		name: req.body.name,
   		location: req.body.location,
