@@ -27,7 +27,7 @@ module.exports = function(app) {
 // Expects urlenconded keys/values
 // Expects name/location/languages/education/linkedin/github/auth
 // On success returns a JSON object with the user id
-  app.post('/api/user', function(req, res) {
+  app.post('/api/user', function(req, res, next) {
   	new User({
   		name: req.body.name,
   		location: req.body.location,
@@ -63,7 +63,7 @@ module.exports = function(app) {
 // Expects urlenconded keys/values
 // Expects name/location/image
 // On success returns a JSON object with the company id
-  app.post('/api/company', function(req, res) {
+  app.post('/api/company', function(req, res, next) {
   	new Companies({
   		name: req.body.name,
   		location: req.body.location,
@@ -150,7 +150,7 @@ module.exports = function(app) {
 
 // POST Request to api/matched?compID='id'&userID='id'&interest='true';
 
-  app.post('/api/cards/matched', function(req, res) {
+  app.post('/api/cards/matched', function(req, res, next) {
     new Cards({
       company_id: req.body.compID,
       users_id: req.body.userID,
