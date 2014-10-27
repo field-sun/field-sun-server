@@ -1,4 +1,4 @@
-var knex = require('../config/knex')
+var knex = require('./knex')
 
 knex.schema.hasTable('users').then(function(exists) {
   if (!exists) {
