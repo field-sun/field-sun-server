@@ -65,7 +65,7 @@ knex.schema.hasTable('matches').then(function(exists) {
       t.integer('company_id').references('id').inTable('companies');
       t.integer('company_users_id').references('id').inTable(
         'company_users');
-      t.string('interest');
+      t.boolean('interest');
     }).then(function() {
       console.log('created matches table.');
     });

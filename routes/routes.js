@@ -156,6 +156,22 @@ module.exports = function(app) {
     });
   });
 
+// POST Request to api/matched?compID='id'&userID='id'&interest='true';
+
+  app.post('/api/cards/matched', function(req, res) {
+    new Cards({
+      company_id: req.query.compID,
+      users_id: req.query.userID,
+      interest: req.query.interest
+    })
+    .save().then(function(match){
+      res.send({id: matched.id});
+    }).catch(function(error) {
+      console.log(error);
+      res.send('An error occured', error);
+    });
+  });
+
 // Default route
   app.get('*', function(req, res) {
     res.sendfile('./public/views/404.html')
