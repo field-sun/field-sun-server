@@ -25,12 +25,14 @@ module.exports = function(app) {
 
 // POST Request to api/user
 // Expects urlenconded keys/values
-// Expects name/location/linkedin/github/auth
+// Expects name/location/languages/education/linkedin/github/auth
 // On success returns a JSON object with the user id
   app.post('/api/user', function(req, res) {
   	new User({
   		name: req.query.name,
   		location: req.query.location,
+      languages: req.query.languages,
+      education: req.query.education,
   		linkedin_token: req.query.linkedin,
   		github_token: req.query.github,
   		auth_token: req.query.auth
@@ -59,12 +61,13 @@ module.exports = function(app) {
 
 // POST Request to api/company
 // Expects urlenconded keys/values
-// Expects name & location
+// Expects name/location/image
 // On success returns a JSON object with the company id
   app.post('/api/company', function(req, res) {
   	new Companies({
   		name: req.query.name,
-  		location: req.query.location
+  		location: req.query.location,
+      imageURL: req.query.image
   	})
   	.save().then(function(company){
   		res.send({id: company.id});
