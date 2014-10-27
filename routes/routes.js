@@ -38,6 +38,8 @@ app.all('*', function(req, res, next) {
 // On success returns a JSON object with the user id
   app.post('/api/user', function(req, res, next) {
     console.log(req);
+    console.log(req.body);
+    console.log(res);
   	new User({
   		name: req.body.name,
   		location: req.body.location,
