@@ -1,18 +1,7 @@
 var User = require('../api/user/user.model');
 var Companies = require('../api/company/company.model');
 var Cards = require('../api/cards/cards.model');
-
-var knex = require('knex')({
-  client: 'pg',
-  connection: {
-    host: 'ec2-54-204-32-91.compute-1.amazonaws.com',
-    port: 5432,
-    user: 'bnyvbckwckmzve',
-    password: '9V7afezRJKRUoIvS38NMsPPATk',
-    database: 'db2g834vbjmt9f',
-    ssl: true
-  }
-});
+var knex = require('../config/knex')
 
 module.exports = function(app) {
 
