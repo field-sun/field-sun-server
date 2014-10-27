@@ -36,6 +36,7 @@ app.all('*', function(req, res, next) {
 // Expects name/location/languages/education/linkedin/github/auth
 // On success returns a JSON object with the user id
   app.post('/api/user', function(req, res, next) {
+    console.log(req);
   	new User({
   		name: req.body.name,
   		location: req.body.location,
