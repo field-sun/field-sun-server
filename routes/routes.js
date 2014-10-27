@@ -1,7 +1,8 @@
 var User = require('../api/user/user.model');
 var Companies = require('../api/company/company.model');
 var Cards = require('../api/cards/cards.model');
-var knex = require('../config/knex')
+var knex = require('../config/knex');
+app.use(bodyParser.json());
 
 module.exports = function(app) {
 
