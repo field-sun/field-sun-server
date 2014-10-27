@@ -1,16 +1,7 @@
 var User = require('../api/user/user.model');
 var Companies = require('../api/company/company.model');
 var Cards = require('../api/cards/cards.model');
-
-var knex = require('knex')({
-  client: 'pg',
-  connection: {
-    host: '127.0.0.1',
-    user: null,
-    password: null,
-    database: 'engnr'
-  }
-});
+var knex = require('../config/knex')
 
 module.exports = function(app) {
 
@@ -148,6 +139,22 @@ module.exports = function(app) {
     })
     .fetchAll().then(function(cards) {
       res.send(cards.toJSON());
+    }).catch(function(error) {
+      console.log(error);
+      res.send('An error occured', error);
+    });
+  });
+
+// POST Request to api/matched?compID='id'&userID='id'&interest='true';
+
+  app.post('/api/cards/matched', function(req, res) {
+    new Cards({
+      company_id: req.query.compID,
+      users_id: req.query.userID,
+      interest: req.query.interest
+    })
+    .save().then(function(match){
+      res.send({id: matched.id});
     }).catch(function(error) {
       console.log(error);
       res.send('An error occured', error);

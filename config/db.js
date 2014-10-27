@@ -1,12 +1,4 @@
-var knex = require('knex')({
-  client: 'pg',
-  connection: {
-    host: '127.0.0.1',
-    user: null,
-    password: null,
-    database: 'engnr'
-  }
-});
+var knex = require('../config/knex')
 
 knex.schema.hasTable('users').then(function(exists) {
   if (!exists) {
@@ -63,7 +55,7 @@ knex.schema.hasTable('matches').then(function(exists) {
       t.integer('company_id').references('id').inTable('companies');
       t.integer('company_users_id').references('id').inTable(
         'company_users');
-      t.string('interest');
+      t.boolean('interest');
     }).then(function() {
       console.log('created matches table.');
     });
