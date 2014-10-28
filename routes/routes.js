@@ -1,9 +1,17 @@
 var User = require('../api/user/user.model');
 var Companies = require('../api/company/company.model');
 var Cards = require('../api/cards/cards.model');
-var knex = require('../config/knex')
+var knex = require('../config/knex');
 
 module.exports = function(app) {
+
+app.all('*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:8100');
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, Accept, Content-Type, Authorization, Content-Length, X-Requested-With');
+  next();
+ });
 
   app.get('/', function(req, res) {
     res.sendfile('./public/index.html');
@@ -25,15 +33,20 @@ module.exports = function(app) {
 
 // POST Request to api/user
 // Expects urlenconded keys/values
-// Expects name/location/linkedin/github/auth
+// Expects name/location/languages/education/linkedin/github/auth
 // On success returns a JSON object with the user id
-  app.post('/api/user', function(req, res) {
+  app.post('/api/user', function(req, res, next) {
+    console.log('Request: ', req);
+    console.log('Body: ', req.body);
+    console.log('Response: ', res);
   	new User({
-  		name: req.query.name,
-  		location: req.query.location,
-  		linkedin_token: req.query.linkedin,
-  		github_token: req.query.github,
-  		auth_token: req.query.auth
+  		name: req.body.name,
+  		location: req.body.location,
+      languages: req.body.languages,
+      education: req.body.education,
+  		linkedin_token: req.body.linkedin,
+  		github_token: req.body.github,
+  		auth_token: req.body.auth
   	})
   	.save().then(function(user){
   		res.send({id: user.id});
@@ -59,12 +72,13 @@ module.exports = function(app) {
 
 // POST Request to api/company
 // Expects urlenconded keys/values
-// Expects name & location
+// Expects name/location/image
 // On success returns a JSON object with the company id
-  app.post('/api/company', function(req, res) {
+  app.post('/api/company', function(req, res, next) {
   	new Companies({
-  		name: req.query.name,
-  		location: req.query.location
+  		name: req.body.name,
+  		location: req.body.location,
+      imageURL: req.body.image
   	})
   	.save().then(function(company){
   		res.send({id: company.id});
@@ -147,11 +161,11 @@ module.exports = function(app) {
 
 // POST Request to api/matched?compID='id'&userID='id'&interest='true';
 
-  app.post('/api/cards/matched', function(req, res) {
+  app.post('/api/cards/matched', function(req, res, next) {
     new Cards({
-      company_id: req.query.compID,
-      users_id: req.query.userID,
-      interest: req.query.interest
+      company_id: req.body.compID,
+      users_id: req.body.userID,
+      interest: req.body.interest
     })
     .save().then(function(match){
       res.send({id: matched.id});

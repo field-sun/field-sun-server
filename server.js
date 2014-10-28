@@ -8,13 +8,13 @@ var port 		   = process.env.PORT || 8080;
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,POST');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
     next();
 }
 
 app.use(bodyParser.json());
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(allowCrossDomain);
 app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(__dirname + '/public'));
